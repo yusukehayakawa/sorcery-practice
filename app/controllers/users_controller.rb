@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  skip_before_action :require_login, only: [:new, :create]
+  before_action :require_login
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -21,8 +23,6 @@ class UsersController < ApplicationController
   def edit
   end
 
-  # POST /users
-  # POST /users.json
   def create
     @user = User.new(user_params)
 
